@@ -2,7 +2,6 @@
   "name": "redux_demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://s2attack2s.github.io/20_01_2022_Redux/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
