@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import List from "./components/List/view/list/list";
-import { Route, Routes, Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import ShowHistory from "./components/List/view/history";
 import ListDetails from "./components/List/view/listDetails/list-details";
