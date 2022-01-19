@@ -1,0 +1,31 @@
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.modal_detail {
+  max-width: 800px;
+  margin: 100px auto;
+}
+.modal_content {
+  text-align: left;
+  min-height: 300px;
+}
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+.checkbox p {
+  margin: 0 10px;
+}
+.checkbox p:first-child {
+  width: 65px;
+}
+.checkbox p:nth-child(2) {
+  width: 130px;
+}
+.header_details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

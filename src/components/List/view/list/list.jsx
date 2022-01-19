@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import Select from "react-select";
+import { createTodo, removeTodo, updateTodo } from "../../action/list";
 import "../../css/list.css";
-import { createTodo, removeTodo, updateTodo } from "../../action/actionList";
-import ShowList from "./showList";
-import ListDetails from "../listDetails/listDetails";
-
+import ShowList from "./show-list";
 class List extends Component {
   constructor(props) {
     super(props);
     this.state = {
       newData: this.props.newListTodo,
+      newUser: this.props.newListUser,
       showButton: true,
       showModal: true,
     };
@@ -29,6 +30,11 @@ class List extends Component {
       workDay: e.target.value,
     });
   };
+  handleChangeName = (e) => {
+    this.setState({
+      label: e.label,
+    });
+  };
 
   handleSubmit = () => {
     let date = new Date();
@@ -39,7 +45,16 @@ class List extends Component {
     let newtitle = this.state.title;
     let newWorkDay = this.state.workDay;
     let newDetails = this.state.details;
-    this.props.ADD_LIST(newtitle, newWorkDay, addTime, newDetails);
+    let newLabel = this.state.label;
+    let status = false;
+    this.props.ADD_LIST(
+      newtitle,
+      newWorkDay,
+      addTime,
+      newDetails,
+      newLabel,
+      status
+    );
     this.setState({
       workDay: "",
       title: "",
@@ -75,7 +90,17 @@ class List extends Component {
     let newtitle = this.state.title;
     let newWorkDay = this.state.workDay;
     let newDetails = this.state.details;
-    this.props.UPDATE_LIST(id, newtitle, newWorkDay, addTime, newDetails);
+    let newLabel = this.state.label;
+    let status = false;
+    this.props.UPDATE_LIST(
+      id,
+      newtitle,
+      newWorkDay,
+      addTime,
+      newDetails,
+      newLabel,
+      status
+    );
     this.setState({
       workDay: "",
       title: "",
@@ -93,7 +118,10 @@ class List extends Component {
   };
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({ newData: nextProps.newListTodo });
+    this.setState({
+      newData: nextProps.newListTodo,
+      newUser: this.props.newUser,
+    });
   }
   render() {
     let button;
@@ -104,7 +132,7 @@ class List extends Component {
           onClick={() => this.handleSubmit()}
           className="btn btn-primary"
         >
-          Thêm mới
+          Thêm việc làm
         </button>
       );
     } else {
@@ -155,12 +183,32 @@ class List extends Component {
             onChange={this.handleChangeWordDay}
             value={this.state.workDay}
           />
-          {button}
+
+          <Select
+            options={this.state.newUser}
+            onChange={this.handleChangeName}
+          />
+
+          <div className="button-group">
+            <div>{button}</div>
+            <div>
+              {" "}
+              <Link to="/">
+                <button>Danh sách nhân viên</button>
+              </Link>
+            </div>
+            <div>
+              <Link to="/history">
+                <button>Lịch sử</button>
+              </Link>
+            </div>
+          </div>
         </div>
 
         <div>
           <div></div>
           <div className="todoGroup">
+            <div>Người làm</div>
             <div>Tiêu đề</div>
             <div>Ngày làm</div>
             <div>Ngày tạo</div>
@@ -182,17 +230,17 @@ class List extends Component {
 }
 let mapDispatchToProps = (dispatch) => {
   return {
-    ADD_LIST: (title, workDay, addTime, details) =>
-      dispatch(createTodo(title, workDay, addTime, details)),
-    UPDATE_LIST: (id, title, workDay, addTime, details) =>
-      dispatch(updateTodo(id, title, workDay, addTime, details)),
+    ADD_LIST: (title, workDay, addTime, details, label, status) =>
+      dispatch(createTodo(title, workDay, addTime, details, label, status)),
+    UPDATE_LIST: (id, title, workDay, addTime, details, label, status) =>
+      dispatch(updateTodo(id, title, workDay, addTime, details, label, status)),
     REMOVE_LIST: (id) => dispatch(removeTodo(id)),
   };
 };
 let mapStateToProps = (state) => {
-  console.log(state);
   return {
     newListTodo: state.todoList,
+    newListUser: state.user,
   };
 };
 

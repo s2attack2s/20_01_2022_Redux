@@ -1,10 +1,5 @@
 import { connect } from "react-redux";
-import {
-  createTodo,
-  updateTodo,
-  removeTodo,
-  successTodo,
-} from "../action/actionList";
+import { createTodo, updateTodo, removeTodo, getHistory } from "../action/list";
 import List from "../view/list/list";
 
 const mapDispatchToProps = (dispatch) => {
@@ -18,9 +13,8 @@ const mapDispatchToProps = (dispatch) => {
     removeList(id) {
       dispatch(removeTodo(id));
     },
-
-    successList(payload) {
-      dispatch(successTodo(payload));
+    getHistory(id) {
+      dispatch(getHistory(id));
     },
   };
 };
