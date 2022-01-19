@@ -1,7 +1,6 @@
 import listUser from "../../../db/user-list";
 
 function postUser(state = listUser, action) {
-  console.log(state);
   switch (action.type) {
     case "ADD_USER":
       state = [action.payload, ...state];
