@@ -1,0 +1,23 @@
+.todoGroup {
+  display: flex;
+  max-width: 700px;
+  margin: auto;
+}
+.todoGroup div {
+  width: 25%;
+  margin: 20px 0;
+}
+.form-group {
+  max-width: 700px;
+  margin: 20px auto;
+  text-align: left;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+}
+.todoGroup button {
+  margin: 0 2px;
+}
